@@ -69,7 +69,12 @@ unsetopt BEEP
 # Aliases
 alias cat=bat
 alias v="/opt/homebrew/bin/nvim"
-alias ls='ls --color'
+# alias ls='ls --color'
+alias ls='eza -l --header --hyperlink --git --git-repos --icons=auto --group-directories-first --sort=extension'
+alias la='eza -alB --header --hyperlink --git --git-repos --icons=auto --group-directories-first --sort=extension'
+alias lt='eza -alBT --header --hyperlink --git --git-repos --icons=auto --group-directories-first --sort=extension'
+alias ld='eza -lD --header --hyperlink --git --git-repos'
+alias lf='eza -lf --header --hyperlink --git --git-repos'
 
 # Dirs
 alias ..="cd .."
