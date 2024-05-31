@@ -68,13 +68,16 @@ unsetopt BEEP
 
 # Aliases
 alias cat=bat
-alias v="/opt/homebrew/bin/nvim"
-# alias ls='ls --color'
-alias ls='eza -l --header --hyperlink --git --git-repos --icons=auto --group-directories-first --sort=extension'
-alias la='eza -alB --header --hyperlink --git --git-repos --icons=auto --group-directories-first --sort=extension'
-alias lt='eza -alBT --header --hyperlink --git --git-repos --icons=auto --group-directories-first --sort=extension'
+alias v='/opt/homebrew/bin/nvim'
+# alias vf='nvim $(fzf --height 40% --reverse)'
+
+# List
+alias l='eza -l --icons --git'
 alias ld='eza -lD --header --hyperlink --git --git-repos'
 alias lf='eza -lf --header --hyperlink --git --git-repos'
+alias ls='eza -alB --header --hyperlink --git --git-repos --icons --group-directories-first --sort=extension'
+alias lt='eza -alBT --level=2 --header --hyperlink --git --git-repos --icons --group-directories-first --sort=extension'
+alias ltt='eza -alBT --level=3 --header --hyperlink --git --git-repos --icons --group-directories-first --sort=extension'
 
 # Dirs
 alias ..="cd .."
@@ -82,6 +85,12 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
+
+# Navigation
+cx() { cd "$@" && l; }
+fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
+f() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
+fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 
 # History
 HISTSIZE=100000
