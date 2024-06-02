@@ -67,7 +67,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 unsetopt BEEP
 
 # Aliases
-alias cat=bat
+# alias cat=bat
 alias v='/opt/homebrew/bin/nvim'
 # alias vf='nvim $(fzf --height 40% --reverse)'
 
