@@ -80,7 +80,7 @@ map("x", "<leader>p", [["_dP]])
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 -- keywordprg
-map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+-- map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 
 -- better indenting
 map("v", "<", "<gv")
