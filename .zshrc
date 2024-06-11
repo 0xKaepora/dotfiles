@@ -69,6 +69,7 @@ unsetopt BEEP
 # Aliases
 # alias cat=bat
 alias v='/opt/homebrew/bin/nvim'
+alias ze='/opt/homebrew/bin/zellij'
 # alias vf='nvim $(fzf --height 40% --reverse)'
 
 # List

@@ -22,12 +22,12 @@ map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Wi
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Move Lines
-map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
-map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
-map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
+map("n", "<C-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+map("n", "<C-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+map("i", "<C-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("i", "<C-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("v", "<C-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
+map("v", "<C-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 
 -- buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
@@ -39,9 +39,9 @@ map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
 -- function to delete buffer
 local function delete_buffer()
-  local bufnr = vim.fn.bufnr('%')  -- Get the buffer number of the current buffer
-  vim.api.nvim_command('bp')  -- Close the current buffer
-  vim.api.nvim_command('bw ' .. bufnr)  -- Wipe out the buffer
+	local bufnr = vim.fn.bufnr("%") -- Get the buffer number of the current buffer
+	vim.api.nvim_command("bp") -- Close the current buffer
+	vim.api.nvim_command("bw " .. bufnr) -- Wipe out the buffer
 end
 map("n", "<leader>bd", delete_buffer, { desc = "Delete Buffer" })
 map("n", "<leader>bD", "<cmd>bd<cr>", { desc = "Delete Buffer and Window" })
@@ -54,10 +54,10 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsea
 
 -- Clear search, diff update and redraw
 map(
-  "n",
-  "<leader>ur",
-  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "Redraw / Clear hlsearch / Diff Update" }
+	"n",
+	"<leader>ur",
+	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+	{ desc = "Redraw / Clear hlsearch / Diff Update" }
 )
 
 -- Saner behavior of n and N
@@ -73,11 +73,11 @@ map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
--- Keep paste register after replacing 
+-- Keep paste register after replacing
 map("x", "<leader>p", [["_dP]])
 
 -- save file
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+-- map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 -- keywordprg
 -- map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
@@ -104,18 +104,18 @@ map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- formatting
 local function format_buffer()
-  vim.lsp.buf.format({ async = true })
+	vim.lsp.buf.format({ async = true })
 end
 map("n", "<leader>cf", format_buffer, { desc = "Format" })
 map("v", "<leader>cf", format_buffer, { desc = "Format" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go({ severity = severity })
-  end
+	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+	severity = severity and vim.diagnostic.severity[severity] or nil
+	return function()
+		go({ severity = severity })
+	end
 end
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
@@ -126,21 +126,47 @@ map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 -- toggle options
-map("n", "<leader>uf", function() vim.lsp.buf.formatting_sync(nil, 1000) end, { desc = "Toggle Auto Format (Global)" })
-map("n", "<leader>us", function() vim.o.spell = not vim.o.spell end, { desc = "Toggle Spelling" })
-map("n", "<leader>uw", function() vim.o.wrap = not vim.o.wrap end, { desc = "Toggle Word Wrap" })
-map("n", "<leader>uL", function() vim.o.relativenumber = not vim.o.relativenumber end, { desc = "Toggle Relative Line Numbers" })
-map("n", "<leader>ul", function() vim.o.number = not vim.o.number end, { desc = "Toggle Line Numbers" })
-map("n", "<leader>ud", function() vim.diagnostic.disable() end, { desc = "Disable Diagnostics" })
-map("n", "<leader>uD", function() vim.diagnostic.enable() end, { desc = "Enable Diagnostics" })
+map("n", "<leader>uf", function()
+	vim.lsp.buf.formatting_sync(nil, 1000)
+end, { desc = "Toggle Auto Format (Global)" })
+map("n", "<leader>us", function()
+	vim.o.spell = not vim.o.spell
+end, { desc = "Toggle Spelling" })
+map("n", "<leader>uw", function()
+	vim.o.wrap = not vim.o.wrap
+end, { desc = "Toggle Word Wrap" })
+map("n", "<leader>uL", function()
+	vim.o.relativenumber = not vim.o.relativenumber
+end, { desc = "Toggle Relative Line Numbers" })
+map("n", "<leader>ul", function()
+	vim.o.number = not vim.o.number
+end, { desc = "Toggle Line Numbers" })
+map("n", "<leader>ud", function()
+	vim.diagnostic.disable()
+end, { desc = "Disable Diagnostics" })
+map("n", "<leader>uD", function()
+	vim.diagnostic.enable()
+end, { desc = "Enable Diagnostics" })
 
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map("n", "<leader>uc", function() vim.o.conceallevel = vim.o.conceallevel == 0 and conceallevel or 0 end, { desc = "Toggle Conceal" })
+map("n", "<leader>uc", function()
+	vim.o.conceallevel = vim.o.conceallevel == 0 and conceallevel or 0
+end, { desc = "Toggle Conceal" })
 if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
-  map("n", "<leader>uh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "Toggle Inlay Hints" })
+	map("n", "<leader>uh", function()
+		vim.lsp.inlay_hint(0, nil)
+	end, { desc = "Toggle Inlay Hints" })
 end
-map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
-map("n", "<leader>ub", function() vim.o.background = vim.o.background == "light" and "dark" or "light" end, { desc = "Toggle Background" })
+map("n", "<leader>uT", function()
+	if vim.b.ts_highlight then
+		vim.treesitter.stop()
+	else
+		vim.treesitter.start()
+	end
+end, { desc = "Toggle Treesitter Highlight" })
+map("n", "<leader>ub", function()
+	vim.o.background = vim.o.background == "light" and "dark" or "light"
+end, { desc = "Toggle Background" })
 
 -- lazygit
 map("n", "<leader>gg", "<cmd>!lazygit<cr>", { desc = "Lazygit (Root Dir)" })
@@ -148,8 +174,8 @@ map("n", "<leader>gG", "<cmd>!lazygit<cr>", { desc = "Lazygit (cwd)" })
 map("n", "<leader>gb", "<cmd>!lazygit blame<cr>", { desc = "Git Blame Line" })
 
 map("n", "<leader>gf", function()
-  local git_path = vim.api.nvim_buf_get_name(0)
-  vim.fn.jobstart("lazygit -f " .. vim.trim(git_path), { detach = true })
+	local git_path = vim.api.nvim_buf_get_name(0)
+	vim.fn.jobstart("lazygit -f " .. vim.trim(git_path), { detach = true })
 end, { desc = "Lazygit Current File History" })
 
 map("n", "<leader>gl", "<cmd>!lazygit log<cr>", { desc = "Lazygit Log" })
