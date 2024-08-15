@@ -16,7 +16,7 @@ return {
 	config = function()
 		require("telescope").setup({
 			defaults = {
-				layout_config = { prompt_position = "top" },
+				layout_config = { prompt_position = "bottom" },
 				sorting_strategy = "ascending",
 			},
 			extensions = {

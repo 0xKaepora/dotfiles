@@ -73,10 +73,10 @@ alias ze='/opt/homebrew/bin/zellij'
 # alias vf='nvim $(fzf --height 40% --reverse)'
 
 # List
-alias l='eza -l --icons --git'
+alias l='eza -al'
 alias ld='eza -lD --header --hyperlink --git --git-repos'
 alias lf='eza -lf --header --hyperlink --git --git-repos'
-alias ls='eza -alB --header --hyperlink --git --git-repos --icons --group-directories-first --sort=extension'
+alias ls='eza -alB --header --group-directories-first --sort=extension'
 alias lt='eza -alBT --level=2 --header --hyperlink --git --git-repos --icons --group-directories-first --sort=extension'
 alias ltt='eza -alBT --level=3 --header --hyperlink --git --git-repos --icons --group-directories-first --sort=extension'
 

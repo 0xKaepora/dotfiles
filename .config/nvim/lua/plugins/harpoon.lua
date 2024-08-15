@@ -58,6 +58,10 @@ return {
 			harpoon:list():add()
 		end)
 
+		vim.keymap.set("n", "<leader>A", function()
+			harpoon:list():remove()
+		end)
+
 		vim.keymap.set("n", "<C-j>", function()
 			harpoon:list():select(1)
 		end)
